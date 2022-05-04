@@ -2,13 +2,13 @@ $("document").ready(function () {
     console.log( "ready!");
     console.log(movies);
 
-    var movieTitle = $(movies.Title);
-    var movieDescrip = $(movies.Description);
-    var moviePrice = $(movies.price);
-    var movieDirector = $(movies.Director);
-    var movieReleaseyear = $(movies.Releaseyear);
-    var movieRuntime = $(movies.Runtime);
-    var movieimage = $(movies.imgscr).toString();
+    var movieTitle = $(movies.Title).text();
+    var movieDescrip = $(movies.Description).text();
+    var moviePrice = $(movies.price).text();
+    var movieDirector = $(movies.Director).text();
+    var movieReleaseyear = $(movies.Releaseyear).text();
+    var movieRuntime = $(movies.Runtime).text();
+    var movieimage = $(movies.imgscr).text();
     
 //for each element in data array
     $.each(movies, function(){
@@ -39,11 +39,31 @@ $("document").ready(function () {
 
     });
 //go to cart page
+var i = 0;
     $("#BookTicket").click(function(){
-        
-        $("#cartno").append();
+        //increase cart number
+        let cartnumber = i + 1;
+        i = cartnumber;
+        console.log(cartnumber);
+        $("#cartno").show(cartnumber);
+
+        //total cost 
+        let thismovieprice = $(this).closest(moviePrice);
+        $.each("<td>", function(){
+            var moviecost = cartnumber*thismovieprice;
+            var total = moviecost.sum();
+        });
         //add item to cart
-        
+        var carttable = `<tr>`+ 
+        `<td><i class="fa-solid fa-circle-xmark"></i></td>`+
+        `<td>`+ thismovieprice +`</td>`+
+        `<td><i class='fa-solid fa-circle-minus id='minusquantity''></i>`+ cartnumber +`<i class='fa-solid fa-circle-plus' id='addquantity'></i></td>`+
+        `<td>R`+ moviecost +`</td>`+
+        `</tr>`;
+        $("carttable").append(carttable);
+
+        //total
+        var addtototal = `<td></td><td></td><td></td><td>`+ total +`</td>`;
   });
 
 //cart table empty defualt
