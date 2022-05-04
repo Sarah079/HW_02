@@ -2,13 +2,13 @@ $("document").ready(function () {
     console.log( "ready!");
     console.log(movies);
 
-    var movieTitle = $(movies.Title).val();
-    var movieDescrip = $(movies.Description).val();
-    var moviePrice = $(movies.price).val();
-    var movieDirector = $(movies.Director).val();
-    var movieReleaseyear = $(movies.Releaseyear).val();
-    var movieRuntime = $(movies.Runtime).val();
-    var movieimage = $(movies.imgscr).val();
+    var movieTitle = $(movies.Title);
+    var movieDescrip = $(movies.Description);
+    var moviePrice = $(movies.price);
+    var movieDirector = $(movies.Director);
+    var movieReleaseyear = $(movies.Releaseyear);
+    var movieRuntime = $(movies.Runtime);
+    var movieimage = $(movies.imgscr).toString();
     
 //for each element in data array
     $.each(movies, function(){
@@ -26,22 +26,31 @@ $("document").ready(function () {
             `</div>`;
 
     $("#moviecards").append(AddedData);
-
     });
 
 //click show details
-    $("#showDetails").click(function(e){
+    $("#showDetails").click(function(){
         $(this).closest("#thisTitle").append(movieTitle);
         $(this).closest("#thisDirector").append(movieDirector);
         $(this).closest("#thisReleaseYear").append(movieReleaseyear);
         $(this).closest("#thisRunTime").append(movieRuntime);
 
         $("#myModal").modal('show');
-        console.log(e);
+
     });
+//go to cart page
+    $("#BookTicket").click(function(){
+        
+        $("#cartno").append();
+        //add item to cart
+        
+  });
 
 //cart table empty defualt
 //cart add
 //cart delete
 
 });
+
+//var url = "HW02_cart.html";
+//$(location).attr('href',url);
