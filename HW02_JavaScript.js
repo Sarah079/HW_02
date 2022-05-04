@@ -14,7 +14,7 @@ $("document").ready(function () {
     $.each(movies, function(){
         var AddedData = `<div class='col-sm-3'>
         <div class='card' style='width: 18rem;'>
-           <img class='card-img-top' src='`+ movieimage.toString +`' alt='Card image cap'>` +
+           <img class='card-img-top' src='`+ movieimage +`' alt='Card image cap'>` +
            `<div class='card-body'>
                <h5 class='card-title'>"`+ movieTitle +`</h5>` + //insert movie tartle 
                 `<p class='card-text'>`+ movieDescrip +`</p>` + //insert description
