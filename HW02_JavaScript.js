@@ -1,76 +1,49 @@
 $("document").ready(function () {
+ 
     console.log( "ready!");
-    console.log(movies);
-
-    var movieTitle = $(movies.Title).text();
-    var movieDescrip = $(movies.Description).text();
-    var moviePrice = $(movies.price).text();
-    var movieDirector = $(movies.Director).text();
-    var movieReleaseyear = $(movies.Releaseyear).text();
-    var movieRuntime = $(movies.Runtime).text();
-    var movieimage = $(movies.imgscr).text();
+    console.log(movies[0].Title);
     
 //for each element in data array
-    $.each(movies, function(){
+    for(let i=0; i < movies.length; i++){
         var AddedData = `<div class='col-sm-3'>
         <div class='card' style='width: 18rem;'>
-           <img class='card-img-top' src='`+ movieimage +`' alt='Card image cap'>` +
+           <img class='card-img-top' id='moviename' src='`+ movies[i].imgscr +`' style='width:160px; height:200px' alt='Card image cap'>` +
            `<div class='card-body'>
-               <h5 class='card-title'>"`+ movieTitle +`</h5>` + //insert movie tartle 
-                `<p class='card-text'>`+ movieDescrip +`</p>` + //insert description
-                `<p class='card-text float-right'>`+ moviePrice +`</p>` + //insert price
-                `<a class='btn btn-primary' id='showDetails'>Show Details</a>`  +
-                `<a class='btn btn-primary' id='BookTicket'>Book Ticket</a>`  +
+               <h5 class='card-title'>`+ movies[i].Title +`</h5>` + //insert movie tartle 
+                `<p class='card-text'>`+ movies[i].Description +`</p>` + //insert description
+                `<p class='card-text float-right'>`+ movies[i].price +`</p>` + //insert price
+                `<a class='btn btn-primary' data-toggle='modal' data-target='#myModal' style='margin-bottom: 20px;'>Show details</a> 
+                <a class='btn btn-primary' id='BookTicket'>Book Ticket</a>`  +
             `</div>` +
             `</div>` +
             `</div>`;
 
     $("#moviecards").append(AddedData);
+    };
+
+
+    //show details modal
+        $("ShowDetails").click(function(){
+            //append details
+            $("#modalTitle").append(movies[i].Title);
+            $("#modalDirector").append(movies[i].Director);
+            $("#modalYear").append(movies[i].Releaseyear);
+            $("#modalRuntime").append(movies[i].Runtime);        
     });
 
-//click show details
-    $("#showDetails").click(function(){
-        $(this).closest("#thisTitle").append(movieTitle);
-        $(this).closest("#thisDirector").append(movieDirector);
-        $(this).closest("#thisReleaseYear").append(movieReleaseyear);
-        $(this).closest("#thisRunTime").append(movieRuntime);
+    //adding to cart 
+    $("BookTicket").click(function(){
+        //foreach click add to cart number 
 
-        $("#myModal").modal('show');
+        //add info to local storage
 
     });
-//go to cart page
-var i = 0;
-    $("#BookTicket").click(function(){
-        //increase cart number
-        let cartnumber = i + 1;
-        i = cartnumber;
-        console.log(cartnumber);
-        $("#cartno").show(cartnumber);
 
-        //total cost 
-        let thismovieprice = $(this).closest(moviePrice);
-        $.each("<td>", function(){
-            var moviecost = cartnumber*thismovieprice;
-            var total = moviecost.sum();
-        });
-        //add item to cart
-        var carttable = `<tr>`+ 
-        `<td><i class="fa-solid fa-circle-xmark"></i></td>`+
-        `<td>`+ thismovieprice +`</td>`+
-        `<td><i class='fa-solid fa-circle-minus id='minusquantity''></i>`+ cartnumber +`<i class='fa-solid fa-circle-plus' id='addquantity'></i></td>`+
-        `<td>R`+ moviecost +`</td>`+
-        `</tr>`;
-        $("carttable").append(carttable);
+    //if cart length == 0 message "No movies in your cart"
+    
+    //get info from local storage 
 
-        //total
-        var addtototal = `<td></td><td></td><td></td><td>`+ total +`</td>`;
-  });
+    //foreach element in local storage add a table row with x-button, movie name, price, decrease butoon, number, increase button and total cost
 
-//cart table empty defualt
-//cart add
-//cart delete
-
+    //work out total cart cost
 });
-
-//var url = "HW02_cart.html";
-//$(location).attr('href',url);

@@ -1,7 +1,9 @@
 <head>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- font awesome -->
     <script src="https://kit.fontawesome.com/58fdd804b4.js" crossorigin="anonymous"></script>    
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
@@ -18,9 +20,13 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="HW02_Html.html"><img src="Images/Movie_icon.png" class="img-responsive img-fluid" style="width: 25px; height: 25px;" alt="Movie_icon"></a></li>
-            <li class="float-right"><a href="HW02_cart.html"><i class="fa-solid fa-cart-shopping fa-2xl"></i><p id="cartno"></p></a></li>
+            <li class="nav-item"><a href="HW02_Html.html"><img src="Images/Movie_icon.png" class="img-responsive img-fluid" style="width: 30px; height: 30px;" alt="Movie_icon"></a></li>
+            <li class="nav-item ml-auto text-right"></li>
           </ul>
+          <span class="navbar-text">
+              <br>
+            <a href="HW02_cart.html"><i class="fa-solid fa-cart-shopping fa-2xl"></i><p id="cartno"></p></a>          
+        </span>
         </div>
       </nav>
     
@@ -33,20 +39,27 @@
     </div>
 
     <!-- modal setup -->
-    <div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+          <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"></h5><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
+              <h5 class="modal-title" id="modalTitle"></h5>
             </div>
             <div class="modal-body">
-                <p class="font-weight-bold">Title:</p> <p id="thisTitle"></p><br>
-                <p class="font-weight-bold">Director/s:</p> <p id="thisDirector"></p><br>                
-                <p class="font-weight-bold">Release Year:</p> <p id="thisReleaseYear"></p><br>
-                <p class="font-weight-bold">Runtime:</p> <p id="thisRunTime"></p><br>
+              <p class="font-weight-bold">Title:</p> <p id="modalTitle"></p> <br>
+              <p class="font-weight-bold">Director/s:</p> <p id="modalDirector"></p> <br>
+              <p class="font-weight-bold">Release Year:</p> <p id="modalYear"></p> <br>
+              <p class="font-weight-bold">Runtime:</p> <p id="modalRuntime"></p> <br>
             </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
     
+    <!-- bootstrap js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
