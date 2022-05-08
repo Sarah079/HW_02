@@ -6,13 +6,13 @@ $("document").ready(function () {
 //for each element in data array
     for(let i=0; i < movies.length; i++){
         var AddedData = `<div class='col-sm-3'>
-        <div class='card' style='width: 18rem;'>
-           <img class='card-img-top' id='moviename' src='`+ movies[i].imgscr +`' style='width:160px; height:200px' alt='Card image cap'>` +
+        <div class='card' style='width: 18rem;'id='`+ i +`'>
+           <img class='card-img-top' src='`+ movies[i].imgscr +`' style='width:160px; height:200px' alt='Card image cap'>` +
            `<div class='card-body'>
-               <h5 class='card-title'>`+ movies[i].Title +`</h5>` + //insert movie tartle 
+               <h5 class='card-title' id='moviename'>`+ movies[i].Title +`</h5>` + //insert movie tartle 
                 `<p class='card-text'>`+ movies[i].Description +`</p>` + //insert description
                 `<p class='card-text float-right'>`+ movies[i].price +`</p>` + //insert price
-                `<a class='btn btn-primary' data-toggle='modal' data-target='#myModal' style='margin-bottom: 20px;'>Show details</a> 
+                `<a class='btn btn-primary' data-toggle='modal' data-target='#myModal' id='ShowModal' style='margin-bottom: 20px;'>Show details</a> 
                 <a class='btn btn-primary' id='BookTicket'>Book Ticket</a>`  +
             `</div>` +
             `</div>` +
@@ -23,27 +23,77 @@ $("document").ready(function () {
 
 
     //show details modal
-        $("ShowDetails").click(function(){
+        $("#ShowModal").ready(function(){
+            
+            //get closest movie details
+            var MTitle = this.closest(movies.Title);
+            var MDirector = this.closest(movies.Director);
+            var MReleaseYear = this.closest(movies.Releaseyear);
+            var MRunTime = this.closest(movies.Runtime);
+
             //append details
-            $("#modalTitle").append(movies[i].Title);
-            $("#modalDirector").append(movies[i].Director);
-            $("#modalYear").append(movies[i].Releaseyear);
-            $("#modalRuntime").append(movies[i].Runtime);        
+            $("#modalTitle").append(MTitle);
+            $("#modalDirector").append(MDirector);
+            $("#modalYear").append(MReleaseYear);
+            $("#modalRuntime").append(MRunTime);        
     });
 
-    //adding to cart 
-    $("BookTicket").click(function(){
+
+    //book ticket function  
+    $("#BookTicket").click(function(){
         //foreach click add to cart number 
+        if (localStorage.clickcount) {
+            localStorage.clickcount = Number(localStorage.clickcount) + 1;
+          } else {
+            localStorage.clickcount = 1;
+          }
+          document.getElementById("cartno").innerHTML = localStorage.clickcount;
 
-        //add info to local storage
+        //get closest movie details
+            var BTitle = this.closest(movies.Title);
+            var BPrice = this.closest(movies.price);
+            let Bquantity = 1;
+            let BCost = Math.round(Bquantity*BPrice);
+
+        // table row with movie info
+            var addtoTable = `<tr> 
+            <td><i class='fa-solid fa-circle-xmark' id='deletemovie'></i>`+ BTitle + `</td>
+            <td>`+ BPrice +`</td>
+            <td><i class='fa-solid fa-circle-minus' id='minusmovie'></i>`+ Bquantity +` <i class='fa-solid fa-circle-plus' id='addmovie'></i></td>
+            <td>R`+ BCost +`</td>
+            </tr>`
+            $("#carttable").append(addtoTable);  
+
+        //add info to local storage    
+          localStorage.setItem(BTitle,BPrice,Bquantity,BCost);
+    });   
+
+    //delete movie
+    $("#deletemovie").click(function(){
+        this.closest("<tr>").remove();
+        localStorage.removeItem(); //not sure how to target specific movie
+    });
+
+    //remove movie quantity
+    $("#minusmovie").click(function(){
+        
+        if (Bquantity == 1){
+            this.closest("<tr>").remove();
+            localStorage.removeItem(); //not sure how to target specific movie
+        }
+        else{
+            var oldquantity =  this.closest("<tr>").localStorage.getItem(Bquantity);
+            var newquantity = oldquantity - 1;
+            return(newquantity);
+        }
+        
 
     });
 
-    //if cart length == 0 message "No movies in your cart"
-    
-    //get info from local storage 
+     //add movie quantity
+     $("#addmovie").click(function(){
+        Bquantity ++;
+        return(Bquantity);
+    });
 
-    //foreach element in local storage add a table row with x-button, movie name, price, decrease butoon, number, increase button and total cost
-
-    //work out total cart cost
 });
